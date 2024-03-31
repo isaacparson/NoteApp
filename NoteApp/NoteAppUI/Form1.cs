@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,43 +12,76 @@ using NoteApp;
 
 namespace NoteAppUI
 {
-    public partial class Form1 : Form
+    public partial class FormNoteApp : Form
     {
-        public Form1()
+        private string path_ = "C:\\Users\\Isaac\\OneDrive\\Документы\\docs\\NoteApp.notes";
+        private Project project_;
+        public FormNoteApp()
         {
             InitializeComponent();
 
-            var people = NoteCategory.People;
+        }
 
-            var sonia = new Note("Соня", people, "Очень хороший человек");
-            var kirill = new Note("Кирилл", people, "Тоже очень хороший человек");
-            var vova = new Note("Вова", people, "Очень хороший повар");
-            var laba = new Note("Лаба 2", NoteCategory.Docs, "Норм лаба");
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            Note note = new Note("", NoteCategory.Other, "");
+            FormAddEdit form = new FormAddEdit(note);
+            form.ShowDialog();
+            project_.AddNote(note);
+            listBox1.Items.Add(note.Name);
+        }
 
-            List<Note> notes = new List<Note> { sonia, kirill, vova, laba };
-
-            Project project = new Project(notes);
-
-            var sortedPeople = project.SortNotes(people);
-
-            label1.Text = "People: ";
-
-            foreach ( Note note in sortedPeople )
+        private string Category(NoteCategory category)
+        {
+            switch (category)
             {
-                label1.Text += note.Name + " ";
+                case NoteCategory.Job: return "Работа";
+                case NoteCategory.Home: return "Дом";
+                case NoteCategory.HealthAndSprot: return "Здоровье и спорт";
+                case NoteCategory.People: return "Люди";
+                case NoteCategory.Docs: return "Документы";
+                case NoteCategory.Finance: return "Финансы";
             }
+            return "Другое";
+        }
 
-            ProjectManager.SaveProject( project );
-            var deserializedProject = ProjectManager.LoadProject();
-
-            var deserializedNotes = deserializedProject.GetNotes();
-
-            label2.Text = "Deserialized project: ";
-
-            foreach ( Note note in deserializedNotes)
+        private void FormNoteApp_Load(object sender, EventArgs e)
+        {
+            var file = File.ReadAllText(path_);
+            if (file.Length != 0)
             {
-                label2.Text += note.Name + " ";
+                project_ = ProjectManager.LoadProject();
+
+                string[] categories = new string[7]{ "Работа", 
+                                                     "Дом",
+                                                     "Здоровье и спорт",
+                                                     "Люди",
+                                                     "Документы",
+                                                     "Финансы",
+                                                     "Другое" };
+                comboBox1.Items.AddRange(categories);
+
+                foreach (Note note in project_.GetNotes())
+                {
+                    listBox1.Items.Add(note.Name);
+                }
             }
+            else
+            {
+                List<Note> list = new List<Note>();
+                project_ = new Project(list);
+            }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Note currentNote = project_.GetNotes().ElementAt(listBox1.SelectedIndex);
+
+            Header.Text = currentNote.Name;
+            labelCategory.Text = Category(currentNote.Category);
+            dateTimePickerCreated.Text = currentNote.TimeOfCreation;
+            dateTimePickerModified.Text = currentNote.TimeOfModification;
+            richTextBox.Text = currentNote.Text;
         }
     }
 }
