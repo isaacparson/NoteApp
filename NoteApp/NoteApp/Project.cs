@@ -28,9 +28,9 @@ namespace NoteApp
             notes_.Add( note );
         }
 
-        public Project(List<Note> notes_)
+        public Project(List<Note> notes)
         {
-            this.notes_ = notes_;
+            notes_ = notes;
         }
 
         public List<Note> SortNotes()
