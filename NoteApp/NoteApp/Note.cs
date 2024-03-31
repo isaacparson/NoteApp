@@ -9,12 +9,23 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace NoteApp
 {
+    /// <summary>
+    /// Класс Заметка для хранения разной информации
+    /// </summary>
     public class Note
     {
         private string name_;
         private NoteCategory category_;
         private string text_;
+
+        /// <summary>
+        /// Время создания заметки, заполняется автоматически
+        /// </summary>
         private string timeOfCreation_;
+
+        /// <summary>
+        /// Время изменения заметки, заполняется автоматически
+        /// </summary>
         private string timeOfModification_;
 
         public Note( string name, NoteCategory category, string text )

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NoteApp
 {
+    /// <summary>
+    /// Перечисление категорий заметок
+    /// </summary>
     public enum NoteCategory
     {
         Job,

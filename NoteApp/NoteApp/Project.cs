@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NoteApp
 {
+    /// <summary>
+    /// Класс проекта, позволяет работать со списком заметок
+    /// </summary>
     public class Project
     {
         private List<Note> notes_;
@@ -36,6 +39,11 @@ namespace NoteApp
             return notes_;
         }
 
+        /// <summary>
+        /// Отсортировать заметки с нужной категорией по времени изменения 
+        /// </summary>
+        /// <param name="category">Категория заметок для сортировки</param>
+        /// <returns>Отсортированный список заметок</returns>
         public List<Note> SortNotes( NoteCategory category )
         {
             var notes = new List<Note>();
