@@ -14,7 +14,7 @@ namespace NoteAppUI
 {
     public partial class FormNoteApp : Form
     {
-        private string path_ = "C:\\Users\\Isaac\\OneDrive\\Документы\\docs\\NoteApp.notes";
+        private string path_ = "C:\\Users\\Dani\\Documents\\docs\\NoteApp.notes";
         private Project project_;
         public FormNoteApp()
         {
@@ -47,19 +47,19 @@ namespace NoteAppUI
 
         private void FormNoteApp_Load(object sender, EventArgs e)
         {
+            string[] categories = new string[7]{ "Работа",
+                                                 "Дом",
+                                                 "Здоровье и спорт",
+                                                 "Люди",
+                                                 "Документы",
+                                                 "Финансы",
+                                                 "Другое" };
+            comboBox1.Items.AddRange(categories);
+
             var file = File.ReadAllText(path_);
             if (file.Length != 0)
             {
                 project_ = ProjectManager.LoadProject();
-
-                string[] categories = new string[7]{ "Работа", 
-                                                     "Дом",
-                                                     "Здоровье и спорт",
-                                                     "Люди",
-                                                     "Документы",
-                                                     "Финансы",
-                                                     "Другое" };
-                comboBox1.Items.AddRange(categories);
 
                 foreach (Note note in project_.GetNotes())
                 {
@@ -73,15 +73,37 @@ namespace NoteAppUI
             }
         }
 
+        private void Form1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Note currentNote = project_.GetNotes().ElementAt(listBox1.SelectedIndex);
+            if (listBox1.SelectedIndex != -1)
+            {
+                Note currentNote = project_.GetNotes().ElementAt(listBox1.SelectedIndex);
 
-            Header.Text = currentNote.Name;
-            labelCategory.Text = Category(currentNote.Category);
-            dateTimePickerCreated.Text = currentNote.TimeOfCreation;
-            dateTimePickerModified.Text = currentNote.TimeOfModification;
-            richTextBox.Text = currentNote.Text;
+                Header.Text = currentNote.Name;
+                labelCategory.Text = Category(currentNote.Category);
+                dateTimePickerCreated.Text = currentNote.TimeOfCreation;
+                dateTimePickerModified.Text = currentNote.TimeOfModification;
+                richTextBox.Text = currentNote.Text;
+            }
+        }
+
+        private void Form1_Closing(object sender, FormClosingEventArgs e)
+        {
+            ProjectManager.SaveProject(project_);
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            Note currentNote = project_.GetNotes().ElementAt(listBox1.SelectedIndex);
+            project_.GetNotes().Remove(currentNote);
+            listBox1.Items.Remove(currentNote.Name);
+
+
         }
     }
 }

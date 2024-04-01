@@ -45,6 +45,8 @@ namespace NoteAppUI
             remoteNote_.Category = Category(comboBoxCategory.Text);
             remoteNote_.Text = richTextBox1.Text;
 
+            this.Close();
+
         }
     }
 }
