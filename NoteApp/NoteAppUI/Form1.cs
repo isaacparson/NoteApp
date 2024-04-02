@@ -45,16 +45,32 @@ namespace NoteAppUI
             return "Другое";
         }
 
+        private NoteCategory Category(string category)
+        {
+            switch (category)
+            {
+                case "Работа": return NoteCategory.Job;
+                case "Дом": return NoteCategory.Home;
+                case "Здоровье и спорт": return NoteCategory.HealthAndSprot;
+                case "Люди": return NoteCategory.People;
+                case "Документы": return NoteCategory.Docs;
+                case "Финансы": return NoteCategory.Finance;
+            }
+            return NoteCategory.Other;
+        }
+
         private void FormNoteApp_Load(object sender, EventArgs e)
         {
-            string[] categories = new string[7]{ "Работа",
+            string[] categories = new string[8]{ "Работа",
                                                  "Дом",
                                                  "Здоровье и спорт",
                                                  "Люди",
                                                  "Документы",
                                                  "Финансы",
-                                                 "Другое" };
+                                                 "Другое",
+                                                 "Все"};
             comboBox1.Items.AddRange(categories);
+            comboBox1.SelectedText = categories[7];
 
             var file = File.ReadAllText(path_);
             if (file.Length != 0)
@@ -102,8 +118,35 @@ namespace NoteAppUI
             Note currentNote = project_.GetNotes().ElementAt(listBox1.SelectedIndex);
             project_.GetNotes().Remove(currentNote);
             listBox1.Items.Remove(currentNote.Name);
+        }
 
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            Note currentNote = project_.GetNotes().ElementAt(listBox1.SelectedIndex);
+            FormAddEdit form = new FormAddEdit(currentNote);
+            form.ShowDialog();
+        }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedItem.ToString() == "Все")
+            {
+                listBox1.Items.Clear();
+                foreach (Note note in project_.GetNotes())
+                {
+                    listBox1.Items.Add(note.Name);
+                }
+            }
+            else
+            {
+                var sortedNotes = project_.SortNotes(Category(comboBox1.SelectedItem.ToString()));
+
+                listBox1.Items.Clear();
+                foreach (Note note in sortedNotes)
+                {
+                    listBox1.Items.Add(note.Name);
+                }
+            }
         }
     }
 }

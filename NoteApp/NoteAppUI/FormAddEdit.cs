@@ -20,9 +20,22 @@ namespace NoteAppUI
             remoteNote_ = note;
         }
 
+        private string[] categories = new string[7]{ "Работа",
+                                                     "Дом",
+                                                     "Здоровье и спорт",
+                                                     "Люди",
+                                                     "Документы",
+                                                     "Финансы",
+                                                     "Другое" };
+
         private void FormAddEdit_Load(object sender, EventArgs e)
         {
+            comboBoxCategory.Items.AddRange(categories);
 
+
+            textBoxTitle.Text = remoteNote_.Name;
+            comboBoxCategory.SelectedIndex = ((int)remoteNote_.Category);
+            richTextBox1.Text = remoteNote_.Text;
         }
 
         private NoteCategory Category(string category)

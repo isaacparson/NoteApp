@@ -60,7 +60,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1220, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1220, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -96,17 +96,18 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(133, 31);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(248, 24);
             this.comboBox1.TabIndex = 2;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 16;
             this.listBox1.Location = new System.Drawing.Point(17, 81);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(364, 564);
             this.listBox1.TabIndex = 3;
@@ -123,9 +124,9 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.Header);
             this.groupBox1.Location = new System.Drawing.Point(413, 15);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(775, 683);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
@@ -133,7 +134,7 @@
             // richTextBox
             // 
             this.richTextBox.Location = new System.Drawing.Point(25, 126);
-            this.richTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.richTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBox.Name = "richTextBox";
             this.richTextBox.Size = new System.Drawing.Size(740, 549);
             this.richTextBox.TabIndex = 7;
@@ -143,7 +144,7 @@
             // 
             this.dateTimePickerModified.Enabled = false;
             this.dateTimePickerModified.Location = new System.Drawing.Point(425, 81);
-            this.dateTimePickerModified.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateTimePickerModified.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePickerModified.Name = "dateTimePickerModified";
             this.dateTimePickerModified.Size = new System.Drawing.Size(265, 22);
             this.dateTimePickerModified.TabIndex = 6;
@@ -162,7 +163,7 @@
             // 
             this.dateTimePickerCreated.Enabled = false;
             this.dateTimePickerCreated.Location = new System.Drawing.Point(105, 81);
-            this.dateTimePickerCreated.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateTimePickerCreated.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePickerCreated.Name = "dateTimePickerCreated";
             this.dateTimePickerCreated.Size = new System.Drawing.Size(189, 22);
             this.dateTimePickerCreated.TabIndex = 4;
@@ -211,7 +212,7 @@
             // buttonAdd
             // 
             this.buttonAdd.Location = new System.Drawing.Point(17, 670);
-            this.buttonAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonAdd.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(35, 32);
             this.buttonAdd.TabIndex = 5;
@@ -222,17 +223,18 @@
             // buttonEdit
             // 
             this.buttonEdit.Location = new System.Drawing.Point(60, 670);
-            this.buttonEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonEdit.Margin = new System.Windows.Forms.Padding(4);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(35, 32);
             this.buttonEdit.TabIndex = 6;
             this.buttonEdit.Text = "e";
             this.buttonEdit.UseVisualStyleBackColor = true;
+            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
             // buttonDelete
             // 
             this.buttonDelete.Location = new System.Drawing.Point(103, 670);
-            this.buttonDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonDelete.Margin = new System.Windows.Forms.Padding(4);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(35, 32);
             this.buttonDelete.TabIndex = 7;
@@ -254,7 +256,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormNoteApp";
             this.Text = "NoteApp";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_Closing);
