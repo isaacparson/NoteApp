@@ -33,7 +33,41 @@ namespace NoteApp.UnitTests
 
         public void TestSortNotes1()
         {
+            Note note = new Note("name", NoteCategory.Other, "");
+            note.TimeOfModification = (new DateTime(2024, 4, 7, 10, 0, 0)).ToString();
 
+            Note note2 = new Note("name2", NoteCategory.Other, "");
+            note2.TimeOfModification = (new DateTime(2024, 4, 7, 11, 0, 0)).ToString();
+
+            List<Note> list = new List<Note> { note2, note };
+            Project project = new Project(list);
+
+            List<Note> correctList = new List<Note> { note, note2 };
+
+            Assert.Equals( project.SortNotes(), correctList );
+        }
+
+        public void TestSortNotes2()
+        {
+            Note note = new Note("name", NoteCategory.Job, "");
+            note.TimeOfModification = (new DateTime(2024, 4, 7, 10, 0, 0)).ToString();
+
+            Note note2 = new Note("name2", NoteCategory.Home, "");
+            note2.TimeOfModification = (new DateTime(2024, 4, 7, 11, 0, 0)).ToString();
+
+            List<Note> incorrectList = new List<Note> { note2, note };
+            Project project = new Project(incorrectList);
+
+            List<Note> correctList = new List<Note> { note };
+            Assert.Equals(correctList, project.SortNotes(NoteCategory.Job));
+        }
+
+        public void TestSortNotes3()
+        {
+            List<Note> voidList = new List<Note>();
+
+            Project project = new Project(voidList);
+            Assert.Equals( project.SortNotes(NoteCategory.Job), voidList );
         }
     }
 }

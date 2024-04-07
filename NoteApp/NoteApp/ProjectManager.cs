@@ -17,7 +17,7 @@ namespace NoteApp
     /// </summary>
     public static class ProjectManager
     {
-        private const string path_ = "C:\\Users\\Dani\\Documents\\docs\\NoteApp.notes";
+        private const string path_ = "C:\\Users\\Isaac\\OneDrive\\Документы\\docs\\NoteApp.notes";
 
         /// <summary>
         /// Сохранить проект, путь сохранения указан в закрытом поле класса

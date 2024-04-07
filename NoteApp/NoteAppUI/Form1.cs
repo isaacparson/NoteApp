@@ -14,7 +14,7 @@ namespace NoteAppUI
 {
     public partial class FormNoteApp : Form
     {
-        private string path_ = "C:\\Users\\Dani\\Documents\\docs\\NoteApp.notes";
+        private string path_ = "C:\\Users\\Isaac\\OneDrive\\Документы\\docs\\NoteApp.notes";
         private Project project_;
         public FormNoteApp()
         {
