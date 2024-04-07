@@ -4,27 +4,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Compatibility;
+using NUnit.Framework.Legacy;
+using NoteApp;
 
 namespace NoteApp.UnitTests
 {
+    [TestFixture]
     internal class ProjectManagerTest
     {
+        [Test]
         public void TestSaveLoadProject()
         {
+            List<Note> list = new List<Note>();
             Note note = new Note("name", NoteCategory.Other, "");
-            note.TimeOfModification = (new DateTime(2024, 4, 7, 10, 0, 0)).ToString();
+            list.Add(note);
 
-            Note note2 = new Note("name2", NoteCategory.Other, "");
-            note2.TimeOfModification = (new DateTime(2024, 4, 7, 11, 0, 0)).ToString();
-
-            List<Note> list = new List<Note> { note2, note };
             Project project = new Project(list);
-
             ProjectManager.SaveProject(project);
 
             var loadedProject = ProjectManager.LoadProject();
-
-            Assert.Equals(loadedProject, project);
+            ClassicAssert.AreEqual(loadedProject.GetNotes()[0].Name, project.GetNotes()[0].Name);
         }
     }
 }

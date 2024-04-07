@@ -5,11 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit;
 using NUnit.Framework;
+using NUnit.Compatibility;
+using NUnit.Framework.Legacy;
 
 namespace NoteApp.UnitTests
 {
+    [TestFixture]
     internal class ProjectTest
     {
+        [Test]
         public void TestNotes()
         {
             Note note = new Note("name", NoteCategory.Other, "");
@@ -17,9 +21,10 @@ namespace NoteApp.UnitTests
             Project project = new Project(list);
 
             var stillThatList = project.GetNotes();
-            Assert.Equals(list, stillThatList);
+            ClassicAssert.AreEqual(list, stillThatList);
         }
 
+        [Test]
         public void TestAddNote()
         {
             Note note = new Note("name", NoteCategory.Other, "");
@@ -28,9 +33,10 @@ namespace NoteApp.UnitTests
 
             Note otherNote = new Note("other", NoteCategory.Other, "");
             project.AddNote(otherNote);
-            Assert.Equals(project.GetNotes()[1], otherNote);
+            ClassicAssert.AreEqual(project.GetNotes()[1], otherNote);
         }
 
+        [Test]
         public void TestSortNotes1()
         {
             Note note = new Note("name", NoteCategory.Other, "");
@@ -44,9 +50,10 @@ namespace NoteApp.UnitTests
 
             List<Note> correctList = new List<Note> { note, note2 };
 
-            Assert.Equals( project.SortNotes(), correctList );
+            ClassicAssert.AreEqual( project.SortNotes(), correctList );
         }
 
+        [Test]
         public void TestSortNotes2()
         {
             Note note = new Note("name", NoteCategory.Job, "");
@@ -59,15 +66,16 @@ namespace NoteApp.UnitTests
             Project project = new Project(incorrectList);
 
             List<Note> correctList = new List<Note> { note };
-            Assert.Equals(correctList, project.SortNotes(NoteCategory.Job));
+            ClassicAssert.AreEqual(correctList, project.SortNotes(NoteCategory.Job));
         }
 
+        [Test]
         public void TestSortNotes3()
         {
             List<Note> voidList = new List<Note>();
 
             Project project = new Project(voidList);
-            Assert.Equals( project.SortNotes(NoteCategory.Job), voidList );
+            ClassicAssert.AreEqual( project.SortNotes(NoteCategory.Job), voidList );
         }
     }
 }
