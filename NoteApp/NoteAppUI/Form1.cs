@@ -77,9 +77,14 @@ namespace NoteAppUI
             {
                 project_ = ProjectManager.LoadProject();
 
-                foreach (Note note in project_.GetNotes())
+                foreach (Note note in project_.SortNotes())
                 {
                     listBox1.Items.Add(note.Name);
+                }
+
+                if (project_.CurrentNote != null)
+                {
+                    listBox1.SelectedIndex = listBox1.Items.IndexOf(project_.CurrentNote.Name);
                 }
             }
             else
@@ -105,6 +110,8 @@ namespace NoteAppUI
                 dateTimePickerCreated.Text = currentNote.TimeOfCreation;
                 dateTimePickerModified.Text = currentNote.TimeOfModification;
                 richTextBox.Text = currentNote.Text;
+
+                project_.CurrentNote = currentNote;
             }
         }
 

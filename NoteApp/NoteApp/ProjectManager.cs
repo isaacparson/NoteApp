@@ -27,6 +27,9 @@ namespace NoteApp
         {
             var json = JsonSerializer.Serialize(project.GetNotes());
             File.WriteAllText(path_, json);
+            var current = JsonSerializer.Serialize(project.CurrentNote);
+            File.AppendAllText(path_, "\n");
+            File.AppendAllText(path_, current);
         }
 
         /// <summary>
@@ -35,11 +38,14 @@ namespace NoteApp
         /// <returns>Загруженный проект</returns>
         public static Project LoadProject()
         {
-            string json = File.ReadAllText(path_);
+            var json = File.ReadLines(path_);
 
-            List<Note> notes = JsonSerializer.Deserialize<List<Note>>(json);
+            List<Note> notes = JsonSerializer.Deserialize<List<Note>>(json.ElementAt(0));
+            Note current = JsonSerializer.Deserialize<Note>(json.ElementAt(1));
+            Project newProject = new Project(notes);
+            newProject.CurrentNote = current;
 
-            return new Project(notes);
+            return newProject;
 
         }
     }

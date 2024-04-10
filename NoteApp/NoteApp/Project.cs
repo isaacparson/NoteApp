@@ -12,10 +12,23 @@ namespace NoteApp
     public class Project
     {
         private List<Note> notes_;
+        private Note currentNote_;
+
+        public Note CurrentNote
+        { 
+            get 
+            { 
+                return currentNote_; 
+            }
+            set 
+            {
+                currentNote_ = value;
+            }
+        }
 
         private static int CompareNotes(Note n1, Note n2)
         {
-            return n1.TimeOfModification.CompareTo(n2.TimeOfModification);
+            return n2.TimeOfModification.CompareTo(n1.TimeOfModification);
         }
 
         public List<Note> GetNotes() 
