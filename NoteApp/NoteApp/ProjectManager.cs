@@ -17,7 +17,7 @@ namespace NoteApp
     /// </summary>
     public static class ProjectManager
     {
-        private const string path_ = "C:\\Users\\Isaac\\OneDrive\\Документы\\docs\\NoteApp.notes";
+        private const string path_ = "C:\\Users\\Dani\\Documents\\docs\\NoteApp.notes";
 
         /// <summary>
         /// Сохранить проект, путь сохранения указан в закрытом поле класса
@@ -40,12 +40,20 @@ namespace NoteApp
         {
             var json = File.ReadLines(path_);
 
-            List<Note> notes = JsonSerializer.Deserialize<List<Note>>(json.ElementAt(0));
-            Note current = JsonSerializer.Deserialize<Note>(json.ElementAt(1));
-            Project newProject = new Project(notes);
-            newProject.CurrentNote = current;
+            if (json.Any())
+            {
+                List<Note> notes = JsonSerializer.Deserialize<List<Note>>(json.ElementAt(0));
+                Project newProject = new Project(notes);
+                Note current = JsonSerializer.Deserialize<Note>(json.ElementAt(1));
+                newProject.CurrentNote = current;
 
-            return newProject;
+                return newProject;
+            }
+            List<Note> notes2 = new List<Note> { };
+            Project project = new Project(notes2);
+            return project;
+
+
 
         }
     }

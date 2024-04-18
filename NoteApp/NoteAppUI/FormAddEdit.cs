@@ -54,12 +54,18 @@ namespace NoteAppUI
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
-            remoteNote_.Name = textBoxTitle.Text;
-            remoteNote_.Category = Category(comboBoxCategory.Text);
-            remoteNote_.Text = richTextBox1.Text;
+            try
+            {
+                remoteNote_.Name = textBoxTitle.Text;
+                remoteNote_.Category = Category(comboBoxCategory.Text);
+                remoteNote_.Text = richTextBox1.Text;
 
-            this.Close();
-
+                this.Close();
+            }
+            catch
+            {
+                textBoxTitle.Text = "Слишком длинное название!!!";
+            }
         }
     }
 }

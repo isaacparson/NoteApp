@@ -60,7 +60,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1220, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1220, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -208,6 +208,7 @@
             this.Header.Size = new System.Drawing.Size(93, 29);
             this.Header.TabIndex = 0;
             this.Header.Text = "Header";
+            this.Header.Click += new System.EventHandler(this.Header_Click);
             // 
             // buttonAdd
             // 
