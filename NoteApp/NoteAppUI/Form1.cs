@@ -14,7 +14,8 @@ namespace NoteAppUI
 {
     public partial class FormNoteApp : Form
     {
-        private string path_ = "C:\\Users\\Dani\\Documents\\docs\\NoteApp.notes";
+        //private const string path_ = "C:\\Users\\Dani\\Documents\\docs\\NoteApp.notes";
+        private string path_ = "NoteApp.notes";
         private Project project_;
         public FormNoteApp()
         {
@@ -72,25 +73,16 @@ namespace NoteAppUI
             comboBox1.Items.AddRange(categories);
             comboBox1.SelectedText = categories[7];
 
-            var file = File.ReadAllText(path_);
-            if (file.Length != 0)
+            project_ = ProjectManager.LoadProject();
+
+            foreach (Note note in project_.SortNotes())
             {
-                project_ = ProjectManager.LoadProject();
-
-                foreach (Note note in project_.SortNotes())
-                {
-                    listBox1.Items.Add(note.Name);
-                }
-
-                if (project_.CurrentNote != null)
-                {
-                    listBox1.SelectedIndex = listBox1.Items.IndexOf(project_.CurrentNote.Name);
-                }
+                listBox1.Items.Add(note.Name);
             }
-            else
+
+            if (project_.CurrentNote != null)
             {
-                List<Note> list = new List<Note>();
-                project_ = new Project(list);
+                listBox1.SelectedIndex = listBox1.Items.IndexOf(project_.CurrentNote.Name);
             }
         }
 

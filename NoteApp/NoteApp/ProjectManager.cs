@@ -1,13 +1,6 @@
-﻿//using Newtonsoft.Json;
-//using Newtonsoft.Json.Converters;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 using System.Text.Json;
 
 namespace NoteApp
@@ -17,7 +10,9 @@ namespace NoteApp
     /// </summary>
     public static class ProjectManager
     {
-        private const string path_ = "C:\\Users\\Dani\\Documents\\docs\\NoteApp.notes";
+        //private const string path_ = "C:\\Users\\Dani\\Documents\\docs\\NoteApp.notes";
+        private const string path_ = "NoteApp.notes";
+
 
         /// <summary>
         /// Сохранить проект, путь сохранения указан в закрытом поле класса
@@ -38,6 +33,11 @@ namespace NoteApp
         /// <returns>Загруженный проект</returns>
         public static Project LoadProject()
         {
+            if (!File.Exists(path_))
+            {
+                File.Create(path_).Close();
+            }
+
             var json = File.ReadLines(path_);
 
             if (json.Any())
